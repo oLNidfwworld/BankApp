@@ -10,11 +10,12 @@ namespace BankApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()

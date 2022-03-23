@@ -1,6 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BankApp.AppShell">
-    
+             xmlns:views ="clr-namespace:BankApp.Views"
+             x:Class="BankApp.AppShell"
+       FlyoutBehavior="Disabled"
+       Title="Banks">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="Black" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                
+                <Setter Property="Shell.TabBarBackgroundColor" Value="Black" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+
+
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+
+        </ResourceDictionary>
+    </Shell.Resources>
+    <ShellItem Route="LoginView" FlyoutItemIsVisible="False">
+        <ShellContent  ContentTemplate="{DataTemplate views:LoginView}" />
+    </ShellItem>
+
+
+    <TabBar>
+
+
+       <!-- <ShellContent Icon="HomeIcon.png" Title="Home"  ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />-->
+        <ShellContent  Title="Home"  ContentTemplate="{DataTemplate views:TestPage}"  />
+    </TabBar>
+
 </Shell>
