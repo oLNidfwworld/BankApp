@@ -2,17 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BankApp.Views.LoginView"
+             xmlns:vm="clr-namespace:BankApp.ViewModels"
              Shell.TabBarIsVisible="False"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
              Visual="Material"
              >
+
+    <ContentPage.BindingContext>
+        <vm:LoginVM></vm:LoginVM>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
             <StackLayout  Margin="20,70,20,20" >
                 <Label  TextColor="White" FontSize="20" Text="Введите номер карты"></Label>
-                <Entry Keyboard="Numeric" WidthRequest="200" Margin="0,40,0,0" Placeholder="---- ---- ---- ----" HorizontalTextAlignment="Center" FontSize="20" MaxLength="16"  HorizontalOptions="CenterAndExpand"></Entry>
-                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Войти"  Margin="0,40,0,0"></Button>
+                <Entry Keyboard="Numeric" TextColor="White"  PlaceholderColor="White" WidthRequest="200" Margin="0,40,0,0" Placeholder="---- ---- ---- ----" HorizontalTextAlignment="Center" FontSize="20" MaxLength="16"  HorizontalOptions="CenterAndExpand" Text="{Binding CardNumber}"></Entry>
+                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Войти"  Margin="0,40,0,0" Command="{Binding LoginCommand}"></Button>
                 <Label   TextColor="White" HorizontalOptions="CenterAndExpand" Text="или"  Margin="0,20,0,0"></Label>
                 <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Завести новую карту" TextTransform="None"  Margin="0,40,0,0"></Button>
             </StackLayout>

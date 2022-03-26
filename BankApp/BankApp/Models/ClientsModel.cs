@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BankApp.Models
 {
-    internal class ClientsModel
+    public class ClientsModel
     {
         public int Id { get; set; }
         public string FullName { get; set; }
