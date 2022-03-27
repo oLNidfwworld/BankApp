@@ -36,8 +36,8 @@
 
 
        <!-- <ShellContent Icon="HomeIcon.png" Title="Home"  ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />-->
-        <ShellContent  Title="Home"  ContentTemplate="{DataTemplate views:TestPage}"  />
-        <ShellContent  Title="Home"  ContentTemplate="{DataTemplate views:TestPage}" Route="TestPage" />
+        <ShellContent   Title="Главная"  ContentTemplate="{DataTemplate views:MainView}" Route="MainView" />
+        <ShellContent  Title="История"  ContentTemplate="{DataTemplate views:HistoryView}" Route="HistoryView" />
     </TabBar>
 
 </Shell>

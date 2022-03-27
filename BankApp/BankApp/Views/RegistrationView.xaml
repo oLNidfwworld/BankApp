@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BankApp.Views.RegistrationView">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <StackLayout  VerticalOptions="CenterAndExpand" Margin="20">
+                <Label  TextColor="White" FontSize="20" Text="Введите ваши данные"></Label>
+                <Entry  TextColor="White"  PlaceholderColor="White" WidthRequest="400" 
+                       Margin="0,40,0,0" Placeholder="Фамилия" HorizontalTextAlignment="Center" FontSize="20"  
+                       HorizontalOptions="CenterAndExpand"></Entry>
+                
+                <Entry  TextColor="White"  PlaceholderColor="White" WidthRequest="400" 
+                       Margin="0,40,0,0" Placeholder="Имя" HorizontalTextAlignment="Center" FontSize="20"  
+                       HorizontalOptions="CenterAndExpand"></Entry>
+                
+                <Entry  TextColor="White"  PlaceholderColor="White" WidthRequest="400" 
+                       Margin="0,40,0,0" Placeholder="Очество" HorizontalTextAlignment="Center" FontSize="20"  
+                       HorizontalOptions="CenterAndExpand"></Entry>
+
+                <Picker  TitleColor="White" HorizontalOptions="Center" Margin="0,40,0,0" FontSize="20" Title="Выберите банк эмитент"></Picker>
+
+                <StackLayout  Orientation="Horizontal">
+                    <Label  TextColor="White" FontSize="20" Text="Вам есть 18?"></Label>
+                    <CheckBox ></CheckBox>
+                </StackLayout>
+
+                <Label Margin="0,40,0,0"  TextColor="White" FontSize="20" Text="Введите пароль от аккаунта"></Label>
+                <Entry Keyboard="Numeric" TextColor="White"  PlaceholderColor="White" WidthRequest="200" 
+                       Margin="0,40,0,0" Placeholder="****" MaxLength="4" IsPassword="True" HorizontalTextAlignment="Center" FontSize="20"  
+                       HorizontalOptions="CenterAndExpand"></Entry>
+
+                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Войти"  Margin="0,40,0,0" Command="{Binding GoToAppCommand}"></Button>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

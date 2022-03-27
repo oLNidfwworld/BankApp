@@ -53,7 +53,7 @@ namespace BankApp.ViewModels
         {
             if(Password == PasswordO)
             {
-                await Shell.Current.GoToAsync($"//{nameof(TestPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(MainView)}");
             }
             else
             {

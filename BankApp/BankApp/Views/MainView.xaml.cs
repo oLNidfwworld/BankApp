@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace BankApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TestPage : ContentPage
+    public partial class MainView : ContentPage
     {
-        public TestPage()
+        public MainView()
         {
             InitializeComponent();
         }

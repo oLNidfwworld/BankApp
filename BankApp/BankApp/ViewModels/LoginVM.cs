@@ -15,7 +15,10 @@ namespace BankApp.ViewModels
         public LoginVM()
         {
             LoginCommand = new Command(async () => await LoginCommandAsync());
+            RegNewCardCommand = new Command(async () => await RegNewCardAsync());
         }
+
+        
         #region(Commands)
         public Command LoginCommand { get; set; }
         public Command RegNewCardCommand { get; set; }
@@ -49,7 +52,11 @@ namespace BankApp.ViewModels
         #endregion
         #region(Functions)
 
-       
+        private async Task RegNewCardAsync()
+        {
+            await Shell.Current.Navigation.PushModalAsync(new RegistrationView()); 
+        }
+
         private async Task LoginCommandAsync()
 
         {
