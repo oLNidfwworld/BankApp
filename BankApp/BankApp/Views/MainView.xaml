@@ -1,12 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BankApp.Views.MainView">
+             x:Class="BankApp.Views.MainView"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:vm="clr-namespace:BankApp.ViewModels"
+             >
+    <ContentPage.BindingContext>
+        <vm:MainVM></vm:MainVM>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="Gray">
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label HorizontalOptions="CenterAndExpand" Margin="00,00,10,10" Grid.Row="0"   TextColor="White" FontSize="20" Text="{Binding Client.FullName}"></Label>
+            <CarouselView  ItemsSource="{Binding   Cards}" Grid.Row="1" PeekAreaInsets="1" Loop="False" IndicatorView="indicator">
+                <CarouselView.ItemTemplate >
+                    <DataTemplate >
+                        <Frame BackgroundColor="Transparent" HasShadow="True" 
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand">
+                            <Frame Padding="30" CornerRadius="20" BackgroundColor="Black"  >
+                                <StackLayout>
+                                    <Label HorizontalOptions="CenterAndExpand"  TextColor="White" FontSize="20" Text="{Binding  CardNumber}"></Label>
+                                    <Label Margin="10,50,0,0"  TextColor="White" FontSize="20" Text="{Binding  Amount}"></Label>
+                                </StackLayout>
+                            </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView Grid.Row="2" x:Name="indicator" HorizontalOptions="Center" VerticalOptions="Start" IndicatorColor="AliceBlue" SelectedIndicatorColor="Black" />
+            <pancake:PancakeView Grid.Row="3" BackgroundColor="Black" CornerRadius="20,20,0,0">
+                <StackLayout  Margin="10,30,10,10" >
+                    <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Перевести деньги" ></Button>
+                    <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Перевести деньги"  Margin="00,20,0,0"   ></Button>
+                </StackLayout>
+            </pancake:PancakeView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

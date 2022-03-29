@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using BankApp.Views;
+using Xamarin.Essentials;
 
 namespace BankApp.ViewModels
 {
@@ -69,9 +70,12 @@ namespace BankApp.ViewModels
                 Result = await usersrvs.LoginByCard(CardNumber);
                 if (Result)
                 {
-                    //Preferences.Set("Login", Login);
                     var user = await usersrvs.GetUser(CardNumber);
-                    //Preferences.Set("FullName", user.Object.Fullname);
+                    if (!Preferences.ContainsKey("Password"))
+                    {
+                        Preferences.Set("Password", user.Object.Password);
+                        Preferences.Set("Id", user.Object.Id);
+                    }
 
                     await Shell.Current.Navigation.PushModalAsync(new LoginLastStepView(user));
                 }

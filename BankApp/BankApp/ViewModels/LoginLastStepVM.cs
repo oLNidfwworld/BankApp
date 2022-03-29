@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BankApp.ViewModels
@@ -12,6 +13,10 @@ namespace BankApp.ViewModels
 
         public LoginLastStepVM()
         {
+            if (Preferences.ContainsKey("Password"))
+            {
+                Password = Preferences.Get("Password",0); 
+            }
             GoToAppCommand = new Command(async () => await GoToAppAsync());
         }
         #region(Commands)
