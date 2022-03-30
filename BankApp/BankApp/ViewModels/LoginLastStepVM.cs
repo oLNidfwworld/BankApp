@@ -15,7 +15,7 @@ namespace BankApp.ViewModels
         {
             if (Preferences.ContainsKey("Password"))
             {
-                Password = Preferences.Get("Password",0); 
+                PasswordO = Preferences.Get("Password",0); 
             }
             GoToAppCommand = new Command(async () => await GoToAppAsync());
         }

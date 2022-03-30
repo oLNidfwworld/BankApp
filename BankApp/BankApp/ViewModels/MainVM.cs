@@ -1,10 +1,13 @@
 ﻿using BankApp.Models;
 using BankApp.Services;
+using BankApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace BankApp.ViewModels
 {
@@ -17,8 +20,14 @@ namespace BankApp.ViewModels
             Client = new ClientsModel();
             GetClientData();
             GetCards();
+
+            GoToPayCommand = new Command(async () => await  GoToPayAssync());
+            GoToCreateCardCommand = new Command(async () => await  GoToCreateCardAsync());
         }
         #region(Commands)
+
+        public Command GoToPayCommand {get; set; }
+        public Command GoToCreateCardCommand { get; set; }
 
         #endregion
         #region(Props)
@@ -56,6 +65,17 @@ namespace BankApp.ViewModels
                 Cards.Add(item);
             }
         }
+
+
+        private async Task GoToPayAssync()
+        {
+            await Shell.Current.Navigation.PushModalAsync(new PayView());
+        }
+        private async Task GoToCreateCardAsync()
+        {
+            await Shell.Current.Navigation.PushModalAsync(new PayView());
+        }
+
         #endregion
     }
 }

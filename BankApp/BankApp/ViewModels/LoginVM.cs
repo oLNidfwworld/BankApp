@@ -77,7 +77,7 @@ namespace BankApp.ViewModels
                         Preferences.Set("Id", user.Object.Id);
                     }
 
-                    await Shell.Current.Navigation.PushModalAsync(new LoginLastStepView(user));
+                    await Shell.Current.Navigation.PushModalAsync(new LoginLastStepView());
                 }
                 else
                 {

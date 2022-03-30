@@ -18,6 +18,11 @@ namespace BankApp.Services
             client = new FirebaseClient("https://banksapp-48b9a-default-rtdb.firebaseio.com/");
         }
 
+        public async Task<bool> IsCardExists(string cardnum)
+        {
+            var user = (await client.Child("ClientsCards").OnceAsync<ClientsCardsModel>()).Where(u => u.Object.CardNumber == cardnum).FirstOrDefault();
+            return (user != null);
+        }
 
         public async Task<bool> RegisterCard(ClientsCardsModel m)
         {
@@ -42,6 +47,13 @@ namespace BankApp.Services
                 });
             }
             return cards;
+        }
+
+        public async Task<ClientsCardsModel> GetCardByCardNum(string cardnum)
+        {
+            var card = (await client.Child("ClientsCards").OnceAsync<ClientsCardsModel>()).Where(p => p.Object.CardNumber == cardnum).FirstOrDefault().Object;
+           
+            return card;
         }
     }
 }

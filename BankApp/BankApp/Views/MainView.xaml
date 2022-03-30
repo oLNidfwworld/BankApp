@@ -37,7 +37,7 @@
             <IndicatorView Grid.Row="2" x:Name="indicator" HorizontalOptions="Center" VerticalOptions="Start" IndicatorColor="AliceBlue" SelectedIndicatorColor="Black" />
             <pancake:PancakeView Grid.Row="3" BackgroundColor="Black" CornerRadius="20,20,0,0">
                 <StackLayout  Margin="10,30,10,10" >
-                    <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Перевести деньги" ></Button>
+                    <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Перевести деньги" Command="{Binding GoToPayCommand}"></Button>
                     <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Перевести деньги"  Margin="00,20,0,0"   ></Button>
                 </StackLayout>
             </pancake:PancakeView>

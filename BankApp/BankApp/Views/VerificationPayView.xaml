@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BankApp.ViewModels"
+             x:Class="BankApp.Views.VerificationPayView">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <StackLayout Margin="20,40,20,20">
+
+                <Label Margin="0,0,00,30"  TextColor="White" FontSize="20" Text="Номер карты получателя:"></Label>
+                <Label HorizontalOptions="Center" TextColor="White" FontSize="20" Text="{Binding Card.CardNumber}"></Label>
+
+                <Label Margin="0,20,00,30"  TextColor="White" FontSize="20" Text="ФИО получателя:"></Label>
+                <Label HorizontalOptions="Center" TextColor="White" FontSize="20" Text="{Binding Client.FullName}"></Label>
+                
+                <Entry Keyboard="Numeric" TextColor="White" MaxLength="16"  PlaceholderColor="White" WidthRequest="200" 
+                       Margin="0,40,0,0" Placeholder="Сумма"  FontSize="20"  
+                       Text="{Binding SendingAmount}"></Entry>
+                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Отправить" TextTransform="None"  Margin="0,40,0,0"></Button>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
