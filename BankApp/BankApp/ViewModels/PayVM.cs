@@ -44,7 +44,8 @@ namespace BankApp.ViewModels
                 if (Result)
                 {
                     var card = await new ClientsCardServices().GetCardByCardNum(CardNumber);
-                    await Shell.Current.Navigation.PushModalAsync(new VerificationPayView(card));
+                    var client = await new ClientService().GetUser(CardNumber);
+                    await Shell.Current.Navigation.PushModalAsync(new VerificationPayView(card,client.Object ));
                 }
                 else
                 {

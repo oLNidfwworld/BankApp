@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm ="clr-namespace:BankApp.ViewModels"
+             x:Class="BankApp.Views.RegisterNewCardView">
+    <ContentPage.BindingContext>
+        <vm:RegistrationNewCardVM></vm:RegistrationNewCardVM>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="20">
+                <Picker   TextColor="White" TitleColor="White" HorizontalOptions="Center" FontSize="20" Title="Выберите банк" 
+                         
+                         ItemsSource="{Binding BanksList}"
+                         ItemDisplayBinding="{Binding Name}"
+                         SelectedItem="{Binding SelectedBank}"></Picker>
+                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Зарегистрировать"  Margin="0,40,0,0" Command="{Binding  RegisterNewCardCommand}"></Button>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

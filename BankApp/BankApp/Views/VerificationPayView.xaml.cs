@@ -15,10 +15,10 @@ namespace BankApp.Views
     public partial class VerificationPayView : ContentPage
     {
         VerificationPayVM vm;
-        public VerificationPayView(ClientsCardsModel card)
+        public VerificationPayView(ClientsCardsModel card,ClientsModel client)
         {
             InitializeComponent();
-            vm = new VerificationPayVM(card);
+            vm = new VerificationPayVM(card,client);
             
             this.BindingContext = vm;
 

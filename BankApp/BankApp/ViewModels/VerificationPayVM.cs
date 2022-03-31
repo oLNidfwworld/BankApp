@@ -2,14 +2,17 @@
 using BankApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BankApp.ViewModels
 {
     internal class VerificationPayVM:BaseViewModel
     {
-        public VerificationPayVM(ClientsCardsModel card)
+        public VerificationPayVM(ClientsCardsModel card,ClientsModel client)
         {
             Card = new ClientsCardsModel()
             {
@@ -19,31 +22,69 @@ namespace BankApp.ViewModels
                 CardNumber = card.CardNumber,
                 ClientId = card.ClientId,
             };
-            GetClient();
+            Client = new ClientsModel()
+            {
+                FullName = client.FullName,
+                Id = client.Id,
+                Password = client.Password,
+            };
+            Cards = new ObservableCollection<ClientsCardsModel>();
+            GetCards();
+            SendMoneyCommand = new Command(async () => await SendMoneyAsync());
         }
+
         #region(Commands)
+        public Command SendMoneyCommand { get; set; }
         #endregion
         #region(Props)
         private ClientsCardsModel _Card;
-        public ClientsCardsModel Card { get { return _Card; } set { _Card = value; OnPropertyChanged(); } }
+        public ClientsCardsModel Card { 
+            get { return _Card; } 
+            set { _Card = value; OnPropertyChanged(); } 
+        }
         private ClientsModel _Client;
-        public ClientsModel Client { get { return _Client; } set { _Client = value; OnPropertyChanged(); } }
+        public ClientsModel Client { 
+            get { return _Client; } 
+            set { _Client = value; OnPropertyChanged(); } 
+        }
 
 
         private int _SendingAmount;
         public int SendingAmount { get { return _SendingAmount; } set { _SendingAmount = value; OnPropertyChanged(); } }
+
+        public ObservableCollection<ClientsCardsModel> Cards { get; set; }
+        private ClientsCardsModel _SelectedCard;
+        public ClientsCardsModel SelectedCard
+        {
+            get { return _SelectedCard; }
+            set { _SelectedCard = value; OnPropertyChanged(); }
+        }
         #endregion
         #region(Functions)
-        private async void GetClient()
+        private async void GetCards()
         {
-            var client = await new ClientService().GetUser(Card.CardNumber);
-            Client = new ClientsModel()
+
+            int id = Preferences.Get("Id", 0);
+            var data = (await new ClientsCardServices().GetCardByIdAsyncs(id));
+            Cards.Clear();
+            foreach (var item in data)
             {
-                FullName = client.Object.FullName,
-                Id = client.Object.Id,
-                Password = client.Object.Password
-            };
-            await Shell.Current.DisplayAlert("dasd", "dasd", "dasd");
+                Cards.Add(item);
+            }
+        }
+
+        private async Task SendMoneyAsync()
+        {
+            bool Result = await new ClientsCardServices().TransactionTo(SelectedCard.Id, Card.Id, SendingAmount,Preferences.Get("Id",0));
+            if (Result)
+            {
+                await Shell.Current.DisplayAlert("Успешно", "Средства успешно отправлены", "Ok");
+            }
+            else
+            {
+
+                await Shell.Current.DisplayAlert("Ошибка", "Недостаточно средств", "Ok");
+            }
         }
         #endregion
     }

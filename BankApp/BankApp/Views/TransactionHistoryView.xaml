@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm ="clr-namespace:BankApp.ViewModels"
+             x:Class="BankApp.Views.TransactionHistoryView"
+             Title="История транзакций">
+    <ContentPage.BindingContext>
+        <vm:TransactionHistoryVM></vm:TransactionHistoryVM>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshingOrb" Refreshing="RefreshingOrb_Refreshing"  Command="{Binding  RereshingCommand}">
+            <Grid BackgroundColor="Black">
+               
+                
+                <CollectionView ItemsSource="{Binding  Transactions}"  VerticalScrollBarVisibility="Never" 
+                                    SelectionMode="Single" Margin="20">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="Transparent" >
+                                    <Frame  BackgroundColor="White" CornerRadius="5" Margin="5">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                        <StackLayout Orientation="Horizontal" Grid.Row="0">
+                                            <Label Text="Сумма перевода:"></Label>
+                                            <Label  Text="{Binding Amount}"  TextColor="Black" FontSize="14"></Label>
+                                        </StackLayout>
+                                        <StackLayout  Orientation="Horizontal"  Grid.Row="1">
+                                            <Label Text="Время и дата:"></Label>
+                                            <Label  Text="{Binding Time}" TextColor="Black" FontSize="14"></Label>
+
+                                        </StackLayout>
+                                        <StackLayout  Orientation="Horizontal"  Grid.Row="2">
+                                            <Label Text="С карты:"></Label>
+                                            <Label  Text="{Binding CardFrom}" TextColor="Black" FontSize="14"></Label>
+                                        </StackLayout>
+                                        <StackLayout  Orientation="Horizontal"  Grid.Row="4">
+                                            <Label Text="На карту:"></Label>
+                                            <Label  Text="{Binding CardTo}" TextColor="Black" FontSize="14"></Label>
+                                        </StackLayout>
+                                    </Grid>
+                                    </Frame>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+            </Grid>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

@@ -22,7 +22,7 @@
                        Margin="0,40,0,0" Placeholder="Отчество" HorizontalTextAlignment="Center" FontSize="20"  
                        HorizontalOptions="CenterAndExpand" Text="{Binding ThirdName }"></Entry>
 
-                <Picker  TitleColor="White" HorizontalOptions="Center" Margin="0,40,0,0" FontSize="20" Title="Выберите банк эмитент" 
+                <Picker TextColor="White"  TitleColor="White" HorizontalOptions="Center" Margin="0,40,0,0" FontSize="20" Title="Выберите банк эмитент" 
                          ItemsSource="{Binding BanksList}"
                          ItemDisplayBinding="{Binding Name}"
                          SelectedItem="{Binding SelectedBank}"></Picker>

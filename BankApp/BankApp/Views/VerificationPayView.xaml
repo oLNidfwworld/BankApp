@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BankApp.ViewModels"
              x:Class="BankApp.Views.VerificationPayView">
+    <!--<ContentPage.BindingContext>
+        <vm:VerificationPayVM></vm:VerificationPayVM>
+    </ContentPage.BindingContext> -->
     <ContentPage.Content>
         <Grid BackgroundColor="Black">
             <StackLayout Margin="20,40,20,20">
@@ -12,11 +15,17 @@
 
                 <Label Margin="0,20,00,30"  TextColor="White" FontSize="20" Text="ФИО получателя:"></Label>
                 <Label HorizontalOptions="Center" TextColor="White" FontSize="20" Text="{Binding Client.FullName}"></Label>
-                
+
+                <Label Margin="0,20,00,30"  TextColor="White" FontSize="20" Text="С какой карты списать:"></Label>
+                <Picker TextColor="White"  TitleColor="White" HorizontalOptions="Center" FontSize="20" Title="Выберите карту" 
+                         ItemsSource="{Binding Cards}"
+                         ItemDisplayBinding="{Binding CardNumber }"
+                         SelectedItem="{Binding SelectedCard}"></Picker>
+
                 <Entry Keyboard="Numeric" TextColor="White" MaxLength="16"  PlaceholderColor="White" WidthRequest="200" 
                        Margin="0,40,0,0" Placeholder="Сумма"  FontSize="20"  
                        Text="{Binding SendingAmount}"></Entry>
-                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Отправить" TextTransform="None"  Margin="0,40,0,0"></Button>
+                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Отправить" TextTransform="None"  Margin="0,40,0,0" Command="{Binding SendMoneyCommand}"></Button>
 
             </StackLayout>
         </Grid>

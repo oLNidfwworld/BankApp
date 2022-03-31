@@ -19,7 +19,6 @@ namespace BankApp.ViewModels
             BanksList = new ObservableCollection<BanksModel>();
             isChecked = true;
             GetBanks();
-
             EndRegistrationCommand = new Command(async () => await EndRegistrationAsync());
         }
 
@@ -125,7 +124,7 @@ namespace BankApp.ViewModels
                         };
 
                         
-
+                        
                         bool Result = await reg.RegisterUser(client);
                         if (Result)
                         {

@@ -17,18 +17,20 @@ namespace BankApp.ViewModels
         public MainVM()
         {
             Cards = new ObservableCollection<ClientsCardsModel>();
-            Client = new ClientsModel();
             GetClientData();
             GetCards();
-
             GoToPayCommand = new Command(async () => await  GoToPayAssync());
             GoToCreateCardCommand = new Command(async () => await  GoToCreateCardAsync());
+            RefreshingCommand = new Command( () => RefreshingAsync());
+            
         }
+
+        
         #region(Commands)
 
         public Command GoToPayCommand {get; set; }
         public Command GoToCreateCardCommand { get; set; }
-
+        public Command RefreshingCommand { get; set; }
         #endregion
         #region(Props)
 
@@ -40,6 +42,8 @@ namespace BankApp.ViewModels
             get { return _Client; }
             set { _Client = value; OnPropertyChanged(); }
         }
+        private string _Fullname;
+        public  string Fullname { get { return _Fullname;} set { _Fullname = value; OnPropertyChanged(); } }
         #endregion
         #region(Functions)
         private async void GetClientData()
@@ -52,6 +56,7 @@ namespace BankApp.ViewModels
                 FullName = data.Object.FullName,
                 Password = data.Object.Password
             };
+            
         }
 
         private async void GetCards()
@@ -66,6 +71,12 @@ namespace BankApp.ViewModels
             }
         }
 
+        private void RefreshingAsync()
+        {
+            Cards.Clear();
+            GetCards();
+            GetClientData();
+        }
 
         private async Task GoToPayAssync()
         {
@@ -73,7 +84,7 @@ namespace BankApp.ViewModels
         }
         private async Task GoToCreateCardAsync()
         {
-            await Shell.Current.Navigation.PushModalAsync(new PayView());
+            await Shell.Current.Navigation.PushModalAsync(new RegisterNewCardView());
         }
 
         #endregion

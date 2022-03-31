@@ -10,17 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace BankApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainView : ContentPage
+    public partial class RegisterNewCardView : ContentPage
     {
-        public MainView()
+        public RegisterNewCardView()
         {
             InitializeComponent();
-        }
-
-        private async void RefreshView_Refreshing(object sender, EventArgs e)
-        {
-            await Task.Delay(2000);
-            RefresherOrb.IsRefreshing = false;
         }
     }
 }
