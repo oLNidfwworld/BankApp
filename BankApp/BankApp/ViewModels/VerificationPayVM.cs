@@ -83,7 +83,7 @@ namespace BankApp.ViewModels
             else
             {
 
-                await Shell.Current.DisplayAlert("Ошибка", "Недостаточно средств", "Ok");
+                await Shell.Current.DisplayAlert("Ошибка", "Недостаточно средств или операция отменена", "Ok");
             }
         }
         #endregion

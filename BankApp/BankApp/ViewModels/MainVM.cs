@@ -22,7 +22,7 @@ namespace BankApp.ViewModels
             GoToPayCommand = new Command(async () => await  GoToPayAssync());
             GoToCreateCardCommand = new Command(async () => await  GoToCreateCardAsync());
             RefreshingCommand = new Command( () => RefreshingAsync());
-            
+            GoToReplenishCommand = new Command(async ()=>await GoToReplenishAsync());   
         }
 
         
@@ -30,6 +30,7 @@ namespace BankApp.ViewModels
 
         public Command GoToPayCommand {get; set; }
         public Command GoToCreateCardCommand { get; set; }
+        public Command GoToReplenishCommand { get; set; }
         public Command RefreshingCommand { get; set; }
         #endregion
         #region(Props)
@@ -85,6 +86,11 @@ namespace BankApp.ViewModels
         private async Task GoToCreateCardAsync()
         {
             await Shell.Current.Navigation.PushModalAsync(new RegisterNewCardView());
+        }
+
+        private async Task GoToReplenishAsync()
+        {
+            await Shell.Current.Navigation.PushModalAsync(new ReplenishView());
         }
 
         #endregion

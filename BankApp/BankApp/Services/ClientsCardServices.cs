@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace BankApp.Services
 {
@@ -68,36 +69,57 @@ namespace BankApp.Services
             var cardFrom = await GetCardById(idFrom);
             var cardTo = await GetCardById(idTo);
             bool hasComission = false;
-            if(cardFrom.Object.BankId != cardTo.Object.BankId)
+            bool action = false;
+            if (cardFrom.Object.BankId != cardTo.Object.BankId)
             {
                 amount = amount + Convert.ToInt32(amount * 0.13);
                 hasComission = true;
             }
-            if (cardFrom.Object.Amount >= amount)
+            if (hasComission)
             {
-                cardFrom.Object.Amount = cardFrom.Object.Amount - amount;
-                cardTo.Object.Amount= cardTo.Object.Amount + amount;
-
-                await client.Child("ClientsCards").Child(cardFrom.Key).PutAsync(cardFrom.Object);
-                await client.Child("ClientsCards").Child(cardTo.Key).PutAsync(cardTo.Object);
-
-                await client.Child("Transactions").PostAsync(new TransactionsModel()
+                action = await Shell.Current.DisplayAlert("Внимание", $"Данная операция будет взиматься с комиссией. Сумма к оплате {amount}. Продолжить?", "Да", "Нет");
+            }
+            if (action)
+            {
+                if (cardFrom.Object.Amount >= amount)
                 {
-                    Id = new Random().Next(0, int.MaxValue),
-                    Amount = amount,
-                    HasComission = hasComission,
-                    CardFrom = cardFrom.Object.CardNumber,
-                    CardTo = cardTo.Object.CardNumber,
-                    ClientFromId = clientFromId,
-                    Time = DateTime.Now.ToString()
-                });
 
-                return true;
+                    cardFrom.Object.Amount = cardFrom.Object.Amount - amount;
+                    cardTo.Object.Amount = cardTo.Object.Amount + amount;
+
+                    await client.Child("ClientsCards").Child(cardFrom.Key).PutAsync(cardFrom.Object);
+                    await client.Child("ClientsCards").Child(cardTo.Key).PutAsync(cardTo.Object);
+
+                    await client.Child("Transactions").PostAsync(new TransactionsModel()
+                    {
+                        Id = new Random().Next(0, int.MaxValue),
+                        Amount = amount,
+                        HasComission = hasComission,
+                        CardFrom = cardFrom.Object.CardNumber,
+                        CardTo = cardTo.Object.CardNumber,
+                        ClientFromId = clientFromId,
+                        Time = DateTime.Now.ToString()
+                    });
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 return false;
             }
+        }
+
+        public async Task<bool> ReplenishAsync(int idCard,int amount)
+        {
+            var card = await GetCardById(idCard);
+            card.Object.Amount = card.Object.Amount + amount;
+            await client.Child("ClientsCards").Child(card.Key).PutAsync(card.Object);
+            return true;
         }
 
     }

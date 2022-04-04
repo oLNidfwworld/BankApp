@@ -71,17 +71,14 @@ namespace BankApp.ViewModels
                 if (Result)
                 {
                     var user = await usersrvs.GetUser(CardNumber);
-                    if (!Preferences.ContainsKey("Password"))
-                    {
-                        Preferences.Set("Password", user.Object.Password);
-                        Preferences.Set("Id", user.Object.Id);
-                    }
+                    Preferences.Set("Password", user.Object.Password);
+                    Preferences.Set("Id", user.Object.Id);
 
                     await Shell.Current.Navigation.PushModalAsync(new LoginLastStepView());
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Invalid Login or Password", "OK");
+                    await Shell.Current.DisplayAlert("Ошибка", "Неправильный номер карты", "OK");
                 }
             }
             catch (Exception e)

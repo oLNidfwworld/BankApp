@@ -31,7 +31,10 @@
                                 <Frame Padding="30" CornerRadius="20" BackgroundColor="Black"  >
                                     <StackLayout>
                                         <Label HorizontalOptions="CenterAndExpand"  TextColor="White" FontSize="20" Text="{Binding  CardNumber}"></Label>
-                                        <Label Margin="10,50,0,0"  TextColor="White" FontSize="20" Text="{Binding  Amount}"></Label>
+                                        <StackLayout Margin="10,50,0,0"  Orientation="Horizontal">
+                                            <Label  TextColor="White" FontSize="20" Text="{Binding  Amount}"></Label>
+                                            <Label  TextColor="White" FontSize="20" Text="рублей"></Label>
+                                        </StackLayout>
                                     </StackLayout>
                                 </Frame>
                             </Frame>
@@ -43,6 +46,8 @@
                     <StackLayout  Margin="10,30,10,10" >
                         <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Перевести деньги" Command="{Binding GoToPayCommand}"></Button>
                         <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Оформить новую карту"  Margin="00,20,0,0" Command="{Binding GoToCreateCardCommand}"  ></Button>
+                        <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Пополнение"  Margin="00,20,0,0" Command="{Binding GoToReplenishCommand}"  ></Button>
+
                     </StackLayout>
                 </pancake:PancakeView>
             </Grid>

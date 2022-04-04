@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BankApp.ViewModels"
+             x:Class="BankApp.Views.ReplenishView">
+    <ContentPage.BindingContext>
+        <vm:ReplenishVM>
+            
+        </vm:ReplenishVM>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <StackLayout Margin="20">
+
+                <Label Margin="0,0,0,0"  TextColor="White" FontSize="20" Text="Счет зачисления:"></Label>
+                <Picker TextColor="White"  TitleColor="White" HorizontalOptions="Center" FontSize="20" Title="Выберите карту"  
+                         ItemsSource="{Binding Cards}"
+                         ItemDisplayBinding="{Binding CardNumber }"
+                         SelectedItem="{Binding SelectedCard}"></Picker>
+
+                <Label Margin="0,40,0,0"  TextColor="White" FontSize="20" Text="Счет списания:"></Label>
+                <Entry Keyboard="Numeric" TextColor="White" MaxLength="16"  PlaceholderColor="White" WidthRequest="200"  HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
+                       Placeholder="---- ---- ---- ----"  FontSize="20"></Entry>
+
+                <Label Margin="0,40,0,0"  TextColor="White" FontSize="20" Text="Сумма списания:"></Label>
+
+                <Entry Keyboard="Numeric" TextColor="White"  PlaceholderColor="White" WidthRequest="200" 
+                       Margin="0,40,0,0" Placeholder="Сумма"  FontSize="20" Text="{Binding ReplenishAmount}"></Entry>
+                
+                
+                <Button CornerRadius="5" BackgroundColor="White" TextColor="Black" Text="Пополнить" TextTransform="None"  Margin="0,40,0,0" Command="{Binding ReplenishCommand}"></Button>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

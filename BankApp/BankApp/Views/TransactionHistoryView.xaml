@@ -7,6 +7,11 @@
     <ContentPage.BindingContext>
         <vm:TransactionHistoryVM></vm:TransactionHistoryVM>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="grayLabel">
+            <Setter Property="TextColor" Value="Gray"></Setter>
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <RefreshView x:Name="RefreshingOrb" Refreshing="RefreshingOrb_Refreshing"  Command="{Binding  RereshingCommand}">
             <Grid BackgroundColor="Black">
@@ -27,20 +32,20 @@
                                             </Grid.RowDefinitions>
 
                                         <StackLayout Orientation="Horizontal" Grid.Row="0">
-                                            <Label Text="Сумма перевода:"></Label>
+                                            <Label Style="{StaticResource grayLabel }"  Text="Сумма перевода:"></Label>
                                             <Label  Text="{Binding Amount}"  TextColor="Black" FontSize="14"></Label>
                                         </StackLayout>
                                         <StackLayout  Orientation="Horizontal"  Grid.Row="1">
-                                            <Label Text="Время и дата:"></Label>
+                                            <Label Style="{StaticResource grayLabel }"  Text="Время и дата:"></Label>
                                             <Label  Text="{Binding Time}" TextColor="Black" FontSize="14"></Label>
 
                                         </StackLayout>
                                         <StackLayout  Orientation="Horizontal"  Grid.Row="2">
-                                            <Label Text="С карты:"></Label>
+                                            <Label Style="{StaticResource grayLabel }"  Text="С карты:"></Label>
                                             <Label  Text="{Binding CardFrom}" TextColor="Black" FontSize="14"></Label>
                                         </StackLayout>
-                                        <StackLayout  Orientation="Horizontal"  Grid.Row="4">
-                                            <Label Text="На карту:"></Label>
+                                        <StackLayout  Orientation="Horizontal"  Grid.Row="3">
+                                            <Label Style="{StaticResource grayLabel }"  Text="На карту:"></Label>
                                             <Label  Text="{Binding CardTo}" TextColor="Black" FontSize="14"></Label>
                                         </StackLayout>
                                     </Grid>
