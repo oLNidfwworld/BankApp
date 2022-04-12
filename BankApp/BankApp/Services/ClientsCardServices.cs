@@ -68,11 +68,12 @@ namespace BankApp.Services
         {
             var cardFrom = await GetCardById(idFrom);
             var cardTo = await GetCardById(idTo);
+            int amountWithComission = 0;
             bool hasComission = false;
             bool action = false;
             if (cardFrom.Object.BankId != cardTo.Object.BankId)
             {
-                amount = amount + Convert.ToInt32(amount * 0.13);
+                amountWithComission = amount + Convert.ToInt32(amount * 0.13);
                 hasComission = true;
             }
             if (hasComission)
@@ -84,7 +85,10 @@ namespace BankApp.Services
                 if (cardFrom.Object.Amount >= amount)
                 {
 
-                    cardFrom.Object.Amount = cardFrom.Object.Amount - amount;
+                    if(hasComission)
+                        cardFrom.Object.Amount = cardFrom.Object.Amount - amountWithComission;
+                    else
+                        cardFrom.Object.Amount = cardFrom.Object.Amount - amount;
                     cardTo.Object.Amount = cardTo.Object.Amount + amount;
 
                     await client.Child("ClientsCards").Child(cardFrom.Key).PutAsync(cardFrom.Object);
